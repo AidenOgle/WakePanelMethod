@@ -76,17 +76,21 @@ def pitching(args):
                                         ex: pitching(['periodic', 0, 45, 5])
     """
     if isinstance(args,(int, float)):
+        # Constant Pitch
         alpha_initial = -np.radians(args)
         return alpha_initial * np.ones((num_step, 1))
     elif len(args) == 2 and isinstance(args[0],(int, float)):
+        # Uniform Pitch Rate between Values
         alpha_initial = -np.radians(args[0])
         alpha_final = -np.radians(args[1])
         return np.linspace(alpha_initial,alpha_final,num_step)
     elif args[0] == 'rate':
+        # Uniform Pitch Rate using Rate
         alpha_initial = -np.radians(args[1])
         omega = -np.radians(args[2])*num_step/100
         return np.linspace(alpha_initial,omega,num_step)
     elif args[0] == 'periodic':
+        # Periodic
         alpha_initial = -np.radians(args[1])
         amplitude = np.radians(args[2])
         period = 2*np.pi/args[3]/100
