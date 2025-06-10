@@ -68,9 +68,9 @@ def pitching(args):
     
     constant pitch                      ->  pitching(angle)  
                                         ex: pitching(45)
-    uniform pitch rate between values   ->  pitching([angle1, angle2])             
+    constant pitch rate between values   ->  pitching([angle1, angle2])             
                                         ex: pitching([0, 90]) 
-    uniform pitch rate using rate       ->  pitching(['rate', angle1, rate])                
+    constant pitch rate using rate       ->  pitching(['rate', angle1, rate])                
                                         ex: pitching(['rate', 0, 90])
     periodic                            ->  pitching(['periodic',angle1,amplitude,period])
                                         ex: pitching(['periodic', 0, 45, 5])
@@ -80,12 +80,12 @@ def pitching(args):
         alpha_initial = -np.radians(args)
         return alpha_initial * np.ones((num_step, 1))
     elif len(args) == 2 and isinstance(args[0],(int, float)):
-        # Uniform Pitch Rate between Values
+        # Constant Pitch Rate between Values
         alpha_initial = -np.radians(args[0])
         alpha_final = -np.radians(args[1])
         return np.linspace(alpha_initial,alpha_final,num_step)
     elif args[0] == 'rate':
-        # Uniform Pitch Rate using Rate
+        # Constant Pitch Rate using Rate
         alpha_initial = -np.radians(args[1])
         omega = -np.radians(args[2])*num_step/100
         return np.linspace(alpha_initial,omega,num_step)
@@ -162,7 +162,8 @@ axis_ratio = xaxis_size/yaxis_size
 plotscalefactor = 3     # Used to scale plot to be a reasonable size. Lower if plot gets too big to prevent graphical warping
 
 # Plot Setup
-fig, ax = plt.subplots(figsize=(axis_ratio*plotscalefactor,plotscalefactor))
+fig, ax = plt.subplots(figsize=(axis_ratio*plotscalefactor,plotscalefactor))    
+    # figsize calculated to ensure consistent scale between axes and prevent graphical distortion of bodies
 bodyplot, = ax.plot([], [], 'k')
 xdata_body, ydata_body = [], []
 
