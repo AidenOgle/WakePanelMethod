@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - YYYY/MM/DD
 
-
 ### Added
 
+- Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
+- Option to define custom pitching profile using an array of values corresponding to timesteps. Allows for pitching profiles to be defined by functions/equations beyond the preconstructed ones provided
+
 ### Changed
+
+- Reformatted the geometry creation section into a function structure as 'body_creation'
+- Changed how arguments are passed to the 'pitching' function to be more consistent. Now uses a keyword argument structure
+- Added an exception handling case for improper argument syntax for the 'pitching' and 'body_creation' functions to account for the user-unfriendliness of the keyword argument structure. Might implement prompt system in the future for easier user-input
   
 ### Fixed
   
