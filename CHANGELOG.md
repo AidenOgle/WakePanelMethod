@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- 4-Digit NACA airfoil option for body geometry. Supports both symmetric and cambered airfoils. Due to how the airfoil is found piecewise for its upper and lower faces, this method only works for an even number of panels
 - Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
 - Option to define custom pitching profile using an array of values corresponding to timesteps. Allows for pitching profiles to be defined by functions/equations beyond the preconstructed ones provided
 
