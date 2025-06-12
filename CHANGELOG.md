@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Reformatted the geometry creation section into a function structure as 'body_creation'
 - Changed how arguments are passed to the 'pitching' function to be more consistent. Now uses a keyword argument structure
-- Added an exception handling case for improper argument syntax for the 'pitching' and 'body_creation' functions to account for the user-unfriendliness of the keyword argument structure. Might implement prompt system in the future for easier user-input
+- Added an exception handling case for improper argument syntax and inputs for the 'pitching' and 'body_creation' functions to account for the user-unfriendliness of the keyword argument structure. Might implement prompt system in the future for easier user-input
 - Added 'simlength' variable to drive 'num_step' to better reflect the time in whole units instead of hundreths. No direct usage yet, added primarily as a reference variable
   
 ### Fixed
