@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - 4-Digit NACA airfoil option for body geometry. Supports both symmetric and cambered airfoils. Due to how the airfoil is found piecewise for its upper and lower faces, this method currenlty only works for an even number of panels
-  - Due to the piecewise generation, there exists a duplicate x-y point on the leading edge that is later ommitted. This results in an offset between the vortex and collocation points between the two faces. This can be seen most clearly for a symmetrical airfoil with a low number of panels (e.g. NACA='0015', num_panels=10)
+  - Due to the piecewise generation, there exists a duplicate x-y point on the leading edge that is later ommitted. This results in an offset between the location of vortex and collocation points between the two faces. This can be seen most clearly for a symmetrical airfoil with a low number of panels (e.g. NACA='0015', num_panels=10)
   - Currently unclear how significant this offset is on simulation. Potential solution includes keeping duplicate point (would require slight reformatting, effect on simulation also unclear)
 - Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
 - Option to define custom pitching profile using an array of values corresponding to timesteps. Allows for pitching profiles to be defined by functions/equations beyond the preconstructed ones provided
