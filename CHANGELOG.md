@@ -26,7 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added 'simlength' variable to drive 'num_step' to better reflect the time in whole units instead of hundreths. No direct usage yet, added primarily as a reference variable
   
 ### Fixed
-  
+
+- Fixed 'periodic' case for 'pitching' function to reflect direction conventions. The positive anglular direction for the body reference frame cooresponds to the negative global anglular direction from cartesian frame, which was not originally implemented correctly. Changed 'phase' argument to default to 0 to reflect intended default motion under currected system.
+
 ## [0.1.0] -  2025/06/4
 Created initial version of Panel Method code
 Only handles geometry, motion (displacement & pitching), and plotting animation so far. Wake shedding and pressure profile will be addressed in next update
