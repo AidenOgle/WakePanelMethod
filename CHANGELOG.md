@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added a 4-Digit NACA airfoil option for body geometry to directly generate body profiles based on the 4-digit series airfoils. Supports both symmetric and cambered airfoils. [The equations on this site](http://airfoiltools.com/airfoil/naca4digit) were used as reference. This is an experimental feature, it may be more reliable to directly input x-y points using the 'custom' method
+- NACA AIRFOIL : Added a 4-Digit NACA airfoil option for body geometry to directly generate body profiles based on the 4-digit series airfoils. Supports both symmetric and cambered airfoils. [The equations on this site](http://airfoiltools.com/airfoil/naca4digit) were used as reference. This is an experimental feature, it may be more reliable to directly input x-y points using the 'custom' method
   
   - Incorporates new argument 'trailingedge=' which allows the user to specifiy if the trailing edge has a finite thickness or is closed. Viable assignments are 'open', 'closed', and 'prescribed'. 'prescribed' and 'closed' should achieve the same thing, but 'closed' uses an equation whereas 'prescribed' directly assigns the thickness at the trailing edge to be zero. This assignment may be depreciated in the future depending on usefulness
   - Due to the way vortex and collocation points are defined relative to body points based on order, the top and bottom surfaces have an offset in the order of vortex and collocation points compared to eachother. This is most noticeable for symmetric airfoils with a low number of panels (e.g. NACA='0015', num_panels=10, display_vortex=True, display_colloc=True)
   - Odd numbers of panels would cause a duplicate point at either the leading or trailing edges, resulting in coincident vortex and collocation points. To avoid this, the number of panels is shunted up to an even value. If an odd number of panels is desired, it is reccomended to use the 'custom' method  to manually define points
 
-- Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
-- Option to define custom pitching profile using an array of values corresponding to timesteps. Allows for pitching profiles to be defined by functions/equations beyond the preconstructed ones provided
+- CUSTOM BODY : Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
+- CUSTOM PITCHING : Option to define custom pitching profile using an array of values corresponding to timesteps. Allows for pitching profiles to be defined by functions/equations beyond the preconstructed ones provided
 
 ### Changed
 
