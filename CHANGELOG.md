@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - CUSTOM BODY : Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
 - CUSTOM PITCHING : Option to define custom pitching profile using an array of values corresponding to timesteps. Allows for pitching profiles to be defined by functions/equations beyond the preconstructed ones provided
+- Added a progress bar for the fluid simulation. Unlike the original MATLAB code, the results are not shown as they are generated and are instead displayed asynchronously after the program has finished. This improves the viewability of the results animation but leads to a longer wait time between initialization and output, especially for large panel numbers. The progress bar was implemented for quality of life and future optimization purposes
 
 ### Changed
 
