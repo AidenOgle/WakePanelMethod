@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - YYYY/MM/DD
 
+## [0.2.0] - 2025/06/15
+
 ### Added
 
 - FLUID SIMULATION: Incorporated vortex panel method used in original MATLAB code to find lift derived from body circulation and wake behavior. The main difference between the implementations in MATLAB and here is that the MATLAB implementation has local variables that are plotted and written over for each timestep iteration, whereas the implementation here stores values outside of the loop for each time step. This change leads to slightly decreased performance but better plotting stability and access to data at different time steps
@@ -44,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed 'periodic' case for 'pitching' function to reflect direction conventions. The positive anglular direction for the body reference frame cooresponds to the negative global anglular direction from cartesian frame, which was not originally implemented correctly. Changed 'phase' argument to default to 0 to reflect intended default motion under currected system.
 
-## [0.1.0] -  2025/06/4
+## [0.1.0] -  2025/06/04
 Created initial version of Panel Method code
 Only handles geometry, motion (displacement & pitching), and plotting animation so far. Wake shedding and pressure profile will be addressed in next update
 
@@ -71,4 +73,5 @@ Only handles geometry, motion (displacement & pitching), and plotting animation 
   
 ### Fixed
 
+[0.2.0]: 
 [0.1.0]: https://github.com/AidenOgle/2DPanelMethod/blob/c8168b5cd490e402faf819ab6691faab28032685/PanelMethod%200.1.0.py
