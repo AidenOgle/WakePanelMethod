@@ -1,3 +1,4 @@
+%Written by Tianjun Han, 03/15/2025
 %function CL = steady(alpha)
 
 %% Define Parameters
