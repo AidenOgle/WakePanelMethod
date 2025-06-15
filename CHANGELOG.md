@@ -19,8 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - COMPLEXITY and OPTIMIZATION:
     - The Wake Roll-Up section forms the bulk of processing complexity being O(n<sup>3</sup>), with the body lift calculation being O(n<sup>2</sup>⋅m<sup>2</sup>) and the total complexity being O(n<sup>3</sup>+n<sup>2</sup>⋅m<sup>2</sup>), where 'n' is the number of time steps (and wake points) and 'm' is the number of panels.
     - Ideally, optimization would be accomplished through vectorization to eliminate extraneous loops. I do not know if this is possible with the current setup but I will explore this in the next version
-    - Intend to implement parameters that allow wake calculation to be turned off or reduced in resolution (i.e. wake point only generated/calculated for every nth time step)
-
+    - Intend to implement parameters that allow wake calculation to be turned off or reduced. Reduction could be in the form of  time resolution by only generating/calculating wake points every nth time step, or by having a range of influence such that wake points are only compared against points that are close in index (i.e. +/-50 index)
+  
 - NACA AIRFOIL : Added a 4-Digit NACA airfoil option for body geometry to directly generate body profiles based on the 4-digit series airfoils. Supports both symmetric and cambered airfoils. [The equations on this site](http://airfoiltools.com/airfoil/naca4digit) were used as reference. This is an experimental feature, it may be more reliable to directly input x-y points using the 'custom' method
 
   - Incorporates new argument 'trailingedge=' which allows the user to specifiy if the trailing edge has a finite thickness or is closed. Viable assignments are 'open', 'closed', and 'prescribed'. 'prescribed' and 'closed' should achieve the same thing, but 'closed' uses an equation whereas 'prescribed' directly assigns the thickness at the trailing edge to be zero. This assignment may be depreciated in the future depending on usefulness
