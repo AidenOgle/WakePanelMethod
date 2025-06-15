@@ -9,14 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- FLUID SIMULATION: Incorporated vortex panel method used in original MATLAB code to find lift derived from body circulation and wake behavior. The main difference between the implementations in MATLAB and here is that the MATLAB implementation has local variables that are plotted and written over for each timestep iteration, whereas the implementation here stores values outside of the loop for each time step. This change leads to slightly decreased performance but better plotting stability and access to data at different time steps
+  - BODY SIMULATION:
+    - Have to double check if Lift (L) and the Coefficient of Lift (CL) are calculated correctly in accordance with nondimensionalization, as the original MATLAB version didn't allow for variable velocity or density
+    - Intend to create animated plots for L and CL and generate data for other properties like drag
+  - WAKE SIMULATION:
+      - the MATLAB implementation structured the assignment of values for wake points as a queue, which works well for iterative plotting but makes cached plotting slightly obtuse. I intend to eventually change this structure to follow normal increasing array assignment for consistency, but this would require restructuring across multiple sections. Currently handled in the plotting section with a stopgap method of array reversal and indexing
+      - Intend to implement prescribed viscocity effect for wake circulation dissipation
+  - COMPLEXITY and OPTIMIZATION:
+    - The Wake Roll-Up section forms the bulk of processing complexity being O(n<sup>3</sup>), with the body lift calculation being O(n<sup>2</sup>⋅m<sup>2</sup>) and the total complexity being O(n<sup>3</sup>+n<sup>2</sup>⋅m<sup>2</sup>), where 'n' is the number of time steps (and wake points) and 'm' is the number of panels.
+    - Ideally, optimization would be accomplished through vectorization to eliminate extraneous loops. I do not know if this is possible with the current setup but I will explore this in the next version
+    - Intend to implement parameters that allow wake calculation to be turned off or reduced in resolution (i.e. wake point only generated/calculated for every nth time step)
+
 - NACA AIRFOIL : Added a 4-Digit NACA airfoil option for body geometry to directly generate body profiles based on the 4-digit series airfoils. Supports both symmetric and cambered airfoils. [The equations on this site](http://airfoiltools.com/airfoil/naca4digit) were used as reference. This is an experimental feature, it may be more reliable to directly input x-y points using the 'custom' method
-  
+
   - Incorporates new argument 'trailingedge=' which allows the user to specifiy if the trailing edge has a finite thickness or is closed. Viable assignments are 'open', 'closed', and 'prescribed'. 'prescribed' and 'closed' should achieve the same thing, but 'closed' uses an equation whereas 'prescribed' directly assigns the thickness at the trailing edge to be zero. This assignment may be depreciated in the future depending on usefulness
   - Due to the way vortex and collocation points are defined relative to body points based on order, the top and bottom surfaces have an offset in the order of vortex and collocation points compared to eachother. This is most noticeable for symmetric airfoils with a low number of panels (e.g. NACA='0015', num_panels=10, display_vortex=True, display_colloc=True)
   - Odd numbers of panels would cause a duplicate point at either the leading or trailing edges, resulting in coincident vortex and collocation points. To avoid this, the number of panels is shunted up to an even value. If an odd number of panels is desired, it is reccomended to use the 'custom' method  to manually define points
 
 - CUSTOM BODY : Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
+
 - CUSTOM PITCHING : Option to define custom pitching profile using an array of values corresponding to timesteps. Allows for pitching profiles to be defined by functions/equations beyond the preconstructed ones provided
+
 - Added a progress bar and program timer. Unlike the original MATLAB code, the results are not shown as they are generated and are instead displayed asynchronously after the program has finished. This setup improves the viewability of the results animation but leads to a longer wait time between initialization and output, especially for large panel numbers. The progress bar and program timer were implemented for quality of life and future optimization purposes
 
 ### Changed
@@ -24,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reformatted the geometry creation section into a function structure as 'body_creation'
 - Changed how arguments are passed to the 'pitching' function to be more consistent. Now uses a keyword argument structure
 - Added an exception handling case for improper argument syntax and inputs for the 'pitching' and 'body_creation' functions to account for the user-unfriendliness of the keyword argument structure. Might implement prompt system in the future for easier user-input
-- Added 'simlength' variable to drive 'num_step' to better reflect the time in whole units instead of hundreths. No direct usage yet, added primarily as a reference variable
+- Added 'simlength' variable to drive 'num_step' to better reflect the time in whole units instead of hundreths. Allows floats. No direct usage yet, added primarily as a reference variable
   
 ### Fixed
 
