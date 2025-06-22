@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - YYYY/MM/DD
 
+### Added
+
+### Changed
+
+### Fixed
+
+- Fixed aspect ratio distortion of the plot resulting from the addition of the color bar
+- Changed plotting to GridSpec layout to fix plot formatting issues and allow for easier adjustment. Added plot sizing parameters
+
 ## [0.2.0] - 2025/06/15
 
 ### Added
