@@ -14,11 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active
 - Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive method requires Wake Vortex Spreading to be active
 
-
 ### Changed
 
 - Fully vectorized the Induced Velocity Coefficient matrices to avoid repeatedly iterating through panels
 - Changed the plotting of vortex points to represent their local circulation using the same color scale as the wake vortices
+- Currently the 'line' body shape is the only reliably stable geometry, as the vectorization of the main loop revealed several critical underlying issues with the closed body shapes. These will hopefully be adressed before next release
 
 ### Fixed
 
