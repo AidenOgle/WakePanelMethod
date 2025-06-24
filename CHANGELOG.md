@@ -10,12 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Implemented Vortex Blob Method to prevent singularities and smooth vortex interaction. Options included for both Cauchy (linear) and Lamb-Oseen (gaussian) methods
-- Implemented Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency)
-    - Considered making wake vortex marker size correspond to vortex core size in the plot, but the difference between vorticies was imperceptable for any reasonable scale during testing
+    - Blob method currently only works reliably for the 'line' body type. The closed shape of the other body types results in wake vortices becoming trapped in the geometry. This could potentially be addressed by having a finite offset of the wake points from the trailing edge
+- Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active
+- Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive method requires Wake Vortex Spreading to be active
+
 
 ### Changed
 
 - Fully vectorized the Induced Velocity Coefficient matrices to avoid repeatedly iterating through panels
+- Changed the plotting of vortex points to represent their local circulation using the same color scale as the wake vortices
 
 ### Fixed
 
