@@ -9,12 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Implemented Vortex Blob Method to prevent singularities and smooth vortex interaction. Options included for both Cauchy (linear) and Lamb-Oseen (gaussian) methods
+- Implemented Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency)
+    - Considered making wake vortex marker size correspond to vortex core size in the plot, but the difference between vorticies was imperceptable for any reasonable scale during testing
+
 ### Changed
+
+- Fully vectorized the Induced Velocity Coefficient matrices to avoid repeatedly iterating through panels
 
 ### Fixed
 
 - Fixed aspect ratio distortion of the plot resulting from the addition of the color bar
 - Changed plotting to GridSpec layout to fix plot formatting issues and allow for easier adjustment. Added plot sizing parameters
+- Fixed the unsteadyterm integration in the lift calculation to be chordwise instead of index-based and to account for nonuniform panel lengths
 
 ## [0.2.0] - 2025/06/15
 
