@@ -1,6 +1,6 @@
 ## TODO
 
-- [ ] doublecheck and fix plot aspect ratio
+- [x] doublecheck and fix plot aspect ratio
 - [ ] offset of initial wakepoint for vortex blob mechanism
 - [ ] vectorize rollup loops
 - [ ] fix use of trapezoid in lift calculations to account for coincident x-coords from bodies with upper and lower surfaces
