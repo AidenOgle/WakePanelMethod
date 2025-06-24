@@ -1,6 +1,7 @@
 ## TODO
 
 - [x] doublecheck and fix plot aspect ratio
+  - [ ] fix padding issues, ideally dont need to call `ax.set_aspect('equal')` and can just handle it through calculation
 - [ ] offset of initial wakepoint for vortex blob mechanism
 - [ ] vectorize rollup loops
 - [ ] fix use of trapezoid in lift calculations to account for coincident x-coords from bodies with upper and lower surfaces
