@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fully vectorized the Induced Velocity Coefficient matrices to avoid repeatedly iterating through panels
 - Changed the plotting of vortex points to represent their local circulation using the same color scale as the wake vortices
 - Added 'bodyshape' variable to be assigned during the body creation to flag bodies as either 'open' or 'closed'. This flag is then used in the enforcement of the Kutta Condition
-- Kutta Condition enforcement in the creation of A and B matricies was changed to support the geometry of closed bodies. The method for closed bodies actually enforces a stronger form of the Kutta Condition independent of wake behavior, wheereas the original method for open bodies relies on constraining global circulation
+- Kutta Condition enforcement in the creation of A and B matricies was changed to support the geometry of closed bodies. The open body (original) method enforced a global circulation constraint such that total circulation is conserved between the body and wake. The new closed body method directly enforces the strong version of the Kutta condition by prescribing the upper and lower trailing edge vorticies to have the same finite circulation
 
 ### Fixed
 
