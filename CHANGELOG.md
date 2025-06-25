@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Implemented Vortex Blob Method to prevent singularities and smooth vortex interaction. Options included for both Cauchy (linear) and Lamb-Oseen (gaussian) methods
-    - Blob method currently only works reliably for the 'line' body type. The closed shape of the other body types results in wake vortices becoming trapped in the geometry. This could potentially be addressed by having a finite offset of the wake points from the trailing edge
+- Implemented Vortex Blob Method to smooth vortex singularities and allow for core-size dependent visocus modeling. Options included for both Cauchy (linear) and Lamb-Oseen (gaussian) methods
+    - Blob regularization is only applied to wake vortices to avoid boundary condition degradation caused by applying core-sizes to bound body vortices. Initial core-size is adjusted by the `blob_kernel` variable and scaled against average panel length
 - Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active
 - Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive method requires Wake Vortex Spreading to be active
 
