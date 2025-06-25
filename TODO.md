@@ -14,3 +14,4 @@
 - [ ] (possibly) change format of how wake info is indexed. currently newest[0] to oldest[-1]. Slightly unintuivitve in some sections and is not consistent with other arrays, but changing could be more trouble than its worth
 - [x] Make sure kutta condition is being enforced correctly for closed bodies
 - [ ] bluff bodies handling, moveable wake separation point, Kutta Condition toggling
+- [ ] validate lift against tables
