@@ -12,13 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implemented Vortex Blob Method to smooth vortex singularities and allow for core-size dependent visocus modeling. Options included for both Cauchy (linear) and Lamb-Oseen (gaussian) methods
     - Blob regularization is only applied to wake vortices to avoid boundary condition degradation caused by applying core-sizes to bound body vortices. Initial core-size is adjusted by the `blob_kernel` variable and scaled against average panel length
 - Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active
-- Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive method requires Wake Vortex Spreading to be active
+- Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive Decay method is dependent on vortex spreading being active via `spreading = True`
 
 ### Changed
 
 - Fully vectorized the Induced Velocity Coefficient matrices to avoid repeatedly iterating through panels
 - Changed the plotting of vortex points to represent their local circulation using the same color scale as the wake vortices
-- Added 'bodyshape' variable to be assigned during the body creation to flag bodies as either 'open' or 'closed'. This flag is then used in the enforcement of the Kutta Condition
+- Added `'bodyshape'` variable to be assigned during the body creation to flag bodies as either `'open'` or `'closed'`. This flag is then used in the enforcement of the Kutta Condition
 - Kutta Condition enforcement in the creation of A and B matricies was changed to support the geometry of closed bodies. The open body (original) method enforced a global circulation constraint such that total circulation is conserved between the body and wake. The new closed body method directly enforces the strong version of the Kutta condition by prescribing the upper and lower trailing edge vorticies to have the same finite circulation
 
 ### Fixed
@@ -43,10 +43,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Optimization would ideally be accomplished through vectorization to eliminate extraneous loops. This should be possible for both the Wake Roll-Up and Induced Velocity Coefficient sections, but will require some refamiliarization. I will explore this option in the next update
     - Intend to implement parameters that allow wake calculation to be turned off or reduced. Reduction could be in the form of  time resolution by only generating/calculating wake points every nth time step, or by having a range of influence such that wake points are only compared against points that are close in index (i.e. +/-50 index)
   
-- NACA AIRFOIL : Added a 4-Digit NACA airfoil option for body geometry to directly generate body profiles based on the 4-digit series airfoils. Supports both symmetric and cambered airfoils. [The equations on this site](http://airfoiltools.com/airfoil/naca4digit) were used as reference. This is an experimental feature, it may be more reliable to directly input x-y points using the 'custom' method
+- NACA AIRFOIL : Added a 4-Digit NACA airfoil option for body geometry to directly generate body profiles based on the 4-digit series airfoils. Supports both symmetric and cambered airfoils. [The equations on this site](http://airfoiltools.com/airfoil/naca4digit) were used as reference. This is an experimental feature, it may be more reliable to directly input x-y points using the `'custom'` method
 
-  - Incorporates new argument 'trailingedge=' which allows the user to specifiy if the trailing edge has a finite thickness or is closed. Viable assignments are 'open', 'closed', and 'prescribed'. 'prescribed' and 'closed' should achieve the same thing, but 'closed' uses an equation whereas 'prescribed' directly assigns the thickness at the trailing edge to be zero. This assignment may be depreciated in the future depending on usefulness
-  - Due to the way vortex and collocation points are defined relative to body points based on order, the top and bottom surfaces have an offset in the order of vortex and collocation points compared to eachother. This is most noticeable for symmetric airfoils with a low number of panels (e.g. NACA='0015', num_panels=10, display_vortex=True, display_colloc=True)
+  - Incorporates new argument `trailingedge=` which allows the user to specifiy if the trailing edge has a finite thickness or is closed. Viable assignments are `'open'`, `'closed'`, and `'prescribed'`. `'prescribed'` and `'closed'` should achieve the same thing, but `'closed'` uses an equation whereas `'prescribed'` directly assigns the thickness at the trailing edge to be zero. This assignment may be depreciated in the future depending on usefulness
+  - Due to the way vortex and collocation points are defined relative to body points based on order, the top and bottom surfaces have an offset in the order of vortex and collocation points compared to eachother. This is most noticeable for symmetric airfoils with a low number of panels (e.g. `NACA='0015', num_panels=10, display_vortex=True, display_colloc=True`)
   - Odd numbers of panels would cause a duplicate point at either the leading or trailing edges, resulting in coincident vortex and collocation points. To avoid this, the number of panels is shunted up to an even value. If an odd number of panels is desired, it is reccomended to use the 'custom' method  to manually define points
 
 - CUSTOM BODY : Option to define custom body geometry using x-y coordinates. Currently inputted as two arrays, may change to have different syntax in the future to reflect how other programs export x-y data
@@ -57,14 +57,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Reformatted the geometry creation section into a function structure as 'body_creation'
-- Changed how arguments are passed to the 'pitching' function to be more consistent. Now uses a keyword argument structure
-- Added an exception handling case for improper argument syntax and inputs for the 'pitching' and 'body_creation' functions to account for the user-unfriendliness of the keyword argument structure. Might implement prompt system in the future for easier user-input
-- Added 'simlength' variable to drive 'num_step' to better reflect the time in whole units instead of hundreths. Allows floats. No direct usage yet, added primarily as a reference variable
+- Reformatted the geometry creation section into a function structure as `body_creation`
+- Changed how arguments are passed to the `pitching` function to be more consistent. Now uses a keyword argument structure
+- Added an exception handling case for improper argument syntax and inputs for the `pitching` and `body_creation` functions to account for the user-unfriendliness of the keyword argument structure. Might implement prompt system in the future for easier user-input
+- Added `simlength` variable to drive `num_step` to better reflect the time in whole units instead of hundreths. Allows floats. No direct usage yet, added primarily as a reference variable
   
 ### Fixed
 
-- Fixed 'periodic' case for 'pitching' function to reflect direction conventions. The positive anglular direction for the body reference frame cooresponds to the negative global anglular direction from cartesian frame, which was not originally implemented correctly. Changed 'phase' argument to default to 0 to reflect intended default motion under currected system.
+- Fixed `'periodic'` case for `pitching` function to reflect direction conventions. The positive anglular direction for the body reference frame cooresponds to the negative global anglular direction from cartesian frame, which was not originally implemented correctly. Changed `phase` argument to default to `0` to reflect intended default motion under currected system.
 
 ## [0.1.0] -  2025/06/04
 Created initial version of Panel Method code
@@ -73,15 +73,15 @@ Only handles geometry, motion (displacement & pitching), and plotting animation 
 ### Added
 
 - GEOMETRY:
-  - created presets for 'line', 'ellipse', and 'circle' bodies
+  - created presets for `'line'`, `'ellipse'`, and `'circle'` bodies
   - currently bodies are initially centered at the origin (either about their center or quarter-chord). Plan on allowing initial offsets in the future
 - DISPLACEMENT:
   - changed from MATLAB code to allow for irregular displacements. Uses stepwise motion
   - currently only allows for only constant velocity or linear accel/deceleration
   - planned to change to follow same structure as PITCHING section and allow for more predefined or custom velocity profiles
 - PITCHING:
-  - added predefined pitching profiles 'constant', 'constant rate between values', 'constant rate using rate', and 'periodic'
-  - currently structured as a function that passes 'args', will be changed in the future to be more consistent between cases
+  - added predefined pitching profiles `'constant'`, `'constant rate between values'`, `'constant rate using rate'`, and `'periodic'`
+  - currently structured as a function that passes `args`, will be changed in the future to be more consistent between cases
 - PLOTTING:
   - uses FuncAnimation module from matplotlib library
   - added option to automatically scale x-axis to fit the displacement of the body
