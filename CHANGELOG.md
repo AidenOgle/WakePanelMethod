@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active
 - Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive Decay method is dependent on vortex spreading being active via `spreading = True`
     - `'exponential'` is scaled by a time constant `tau` dimensionalized by `simlength`, whereas `'diffusive'` is scaled by an effective radius `r_eff` dimensionalized by average panel length. Both are scalable by the term `decay_kernel`
-- Added `drag` and `coeff_drag` terms as a result of decomposition the lift terms into the global reference frame. This may be incorrect applications of the Kutta-Joukowski Theorem used in the steady term and the vortex impulse formulation of the unsteady term
+- Added `drag` and `coeff_drag` terms as a result of decomposition the lift terms into the global reference frame. Both `lift` and `drag` calculations are experimental in this version because I am unsure if the underlying theories are being applied correctly. I am also currently unclear if lift-induced drag is already handled by the induced velocity calculations or if it needs to be implemented
 
 ### Changed
 
