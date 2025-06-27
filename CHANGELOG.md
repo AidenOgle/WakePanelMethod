@@ -68,5 +68,5 @@ Only handles geometry, motion (displacement & pitching), and plotting animation 
   -added options to display/hide the body, vortex points, and collocation points respectively
 
 
-[0.2.0]: https://github.com/AidenOgle/2DPanelMethod/blob/01c9e7331acd49923f4bec3e91e57892a7ef2685/PanelMethod%200.2.0.py
-[0.1.0]: https://github.com/AidenOgle/2DPanelMethod/blob/c8168b5cd490e402faf819ab6691faab28032685/PanelMethod%200.1.0.py
+[0.2.0]: https://github.com/AidenOgle/WakePanelMethod/releases/tag/v0.2.0
+[0.1.0]: https://github.com/AidenOgle/WakePanelMethod/releases/tag/v0.1.0
