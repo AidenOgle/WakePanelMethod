@@ -18,3 +18,5 @@
   - [ ] Make sure wake/downwash effects are being included
   - [ ] make sure Kutta-Joukousky Theorem is being applied correctly (component decomposition for angle of attack, geometry of integral discretization)
   - [ ] (potentally) momentum viscous drag modeling
+- [ ] plots for coefficients
+- [ ] (potentially) toggles for lift models and assumptions
