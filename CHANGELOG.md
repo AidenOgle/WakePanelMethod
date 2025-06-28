@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - YYYY/MM/DD
 
+This update primarily addresses optimization of vortex influence and wake roll-up through vectorization of nested loops, reducing time complexity from $`O(nm^2+n^2m+n^3)`$ to $`O(n)`$. Although this new time complexity has not been rigourously verified, the difference in program run time is significant and allows for simulation lengths that were previously infeasable.
+
+In the process of restructuring for vectorization, sections were reformmatted to provide clarity on underlying mechanisms. Notably, the hardcoded vortex core size correction in the Wake Roll-Up section was changed to a function to allow for user-definable core sizes and Vortex Blob Regularization methods. This is accompanied by functions that model vortex spreading and dissipation respectively to simulate aspects of visocity
+
 ### Added
 
 - Implemented Vortex Blob Method to smooth vortex singularities and allow for core-size dependent visocus modeling. Options included for both Cauchy `'linear'` and Lamb-Oseen `'gaussian'` methods. Replaced built-in linear blob in wake roll-up section
@@ -26,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fully vectorized the Wake Roll-Up section to avoid doubly iterating over all wakepoints
     - Eliminated self-influence terms from wake-wake interactions in the Wake Roll-Up section
       
-- Changed the plotting of vortex points to represent their local circulation using the same color scale as the wake vortices
+- Changed the plotting of vortex points to represent their local circulation intensity using the same color scale as the wake vortices
   
 - When `spreading = True`, wakepoints are plotted for their marker size to grow proportionally to their percent change in core area. Marker size is not directly physically meaningful and is scaled by the factor `spreading_displayscale` to highlight the normally imperceptable change in vortex core size. To disable this effect, set `spreading_displayscale` to zero
   
@@ -62,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       - Intend to implement prescribed viscocity effect for wake circulation dissipation
         
   - COMPLEXITY and OPTIMIZATION:
-    - The total complexity of the program is O(n⋅m<sup>2</sup>+n<sup>2</sup>⋅m+n<sup>3</sup>), where 'n' is the number of timesteps and 'm' is the number of panels. In most scenarios, timesteps will dominate over the number of panels, resulting in a complexity of O(n<sup>3</sup>).
+    - The total complexity of the program is $`O(nm^2+n^2m+n^3)`$, where 'n' is the number of timesteps and 'm' is the number of panels. In most scenarios, timesteps will dominate over the number of panels, resulting in a complexity of $`O(n^3)`$.
       
     - Optimization would ideally be accomplished through vectorization to eliminate extraneous loops. This should be possible for both the Wake Roll-Up and Induced Velocity Coefficient sections, but will require some refamiliarization. I will explore this option in the next update
       
