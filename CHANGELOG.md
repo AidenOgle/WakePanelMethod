@@ -16,7 +16,7 @@ In the process of restructuring for vectorization, sections were reformmatted to
 - Implemented Vortex Blob Method to smooth vortex singularities and allow for core-size dependent visocus modeling. Options included for both Cauchy `'linear'` and Lamb-Oseen `'gaussian'` methods. Replaced built-in linear blob in wake roll-up section
     - Blob regularization is only applied to wake vortices to avoid boundary condition degradation caused by applying core-sizes to bound body vortices. Initial core-size is adjusted by the `blob_kernel` variable scaled against a user defined length scale
     
-- Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active to have an effect
+- Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $`\delta(t)`$ increases with $`\sqrt{4 \nu t}`$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active to have an effect
   
 - Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive Decay method requires vortex spreading to be active via `spreading = True`
     - `'exponential'` is scaled by a time constant `tau` dimensionalized by `simlength`, whereas `'diffusive'` is scaled by an effective radius `r_eff` dimensionalized by average panel length. Both are scalable by the term `decay_kernel`
