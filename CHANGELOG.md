@@ -9,17 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Implemented Vortex Blob Method to smooth vortex singularities and allow for core-size dependent visocus modeling. Options included for both Cauchy `'linear'` and Lamb-Oseen `'gaussian'` methods
-    - Blob regularization is only applied to wake vortices to avoid boundary condition degradation caused by applying core-sizes to bound body vortices. Initial core-size is adjusted by the `blob_kernel` variable and scaled against average panel length
-- Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active
-- Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive Decay method is dependent on vortex spreading being active via `spreading = True`
-    - `'exponential'` is scaled by a time constant `tau` dimensionalized by `simlength`, whereas `'diffusive'` is scaled by an effective radius `r_eff` dimensionalized by average panel length. Both are scalable by the term `decay_kernel`
-- Added `drag` and `coeff_drag` terms as a result of decomposition the lift terms into the global reference frame. Both `lift` and `drag` calculations are experimental in this version because I am unsure if the underlying theories are being applied correctly. I am also currently unclear if lift-induced drag is already handled by the induced velocity calculations or if it needs to be implemented
+- Implemented Vortex Blob Method to smooth vortex singularities and allow for core-size dependent visocus modeling. Options included for both Cauchy `'linear'` and Lamb-Oseen `'gaussian'` methods. Replaced built-in linear blob in wake roll-up section
+    - Blob regularization is only applied to wake vortices to avoid boundary condition degradation caused by applying core-sizes to bound body vortices. Initial core-size is adjusted by the `blob_kernel` variable scaled against a user defined length scale
+- Implemented Wake Vortex Spreading mechanic option to simulate viscous effects. Vortex core size $\delta(t)$ increases with $\sqrt{4 \nu t}$ (kinematic viscosity dependency). Requires a Vortex Blob Method to be active to have an effect
+- Implemented Wake Vortex Decay mechanic option to simulate viscous effects. Options included for both Exponential Timescale decay and Diffusive decay. Diffusive Decay method requires vortex spreading to be active via `spreading = True`
+    - `'exponential'` is scaled by a time constant `tau` dimensionalized by `simlength`, whereas `'diffusive'` is scaled by an effective radius `r_eff` dimensionalized by average panel length. Both are scalable by the term `decay_kernel`.
+- Added `drag` and `coeff_drag` terms as a result of decomposition the lift terms into the global reference frame. Both `lift` and `drag` calculations are experimental in this version because it is unclear if the underlying theories are being applied correctly. The calculation of forces on the body and their related coefficients needs significant work to ensure their implementation is consistent with theory and the assumptions being made
 
 ### Changed
 
-- Fully vectorized the Induced Velocity Coefficient matrices to avoid repeatedly iterating through panels
+- Fully vectorized the Induced Velocity Coefficient matrices to avoid repeatedly iterating through panels and wakepoints
+- Fully vectorized the Wake Roll-Up section to avoid doubly iterating over all wakepoints
+    - Eliminated self-influence terms from wake-wake interactions in the Wake Roll-Up section
 - Changed the plotting of vortex points to represent their local circulation using the same color scale as the wake vortices
+- When `spreading = True`, wakepoints are plotted for their marker size to grow proportionally to their percent change in core area. Marker size is not directly physically meaningful and is scaled by the factor `spreading_displayscale` to highlight the normally imperceptable change in vortex core size. To disable this effect, set `spreading_displayscale` to zero
 - Added `'bodyshape'` variable to be assigned during the body creation to flag bodies as either `'open'` or `'closed'`. This flag is then used in the enforcement of the Kutta Condition
 - Kutta Condition enforcement in the creation of A and B matricies was changed to support the geometry of closed bodies. The open body (original) method enforced a global circulation constraint such that total circulation is conserved between the body and wake. The new closed body method directly enforces the strong version of the Kutta condition by prescribing the upper and lower trailing edge vorticies to have the same finite circulation
     - Current code formulation applies the Kutta condition regardless of body shape. This results in physically unrealistic flows for bluff bodies like the `'circle'`. Intend to make the enforcement of the Kutta condition toggleable a future update and allow dynaimic definition of separation points
