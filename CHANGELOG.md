@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - YYYY/MM/DD
 
-This update primarily addresses optimization of vortex influence and wake roll-up through vectorization of nested loops, reducing time complexity from $`O(nm^2+n^2m+n^3)`$ to $`O(n)`$. Although this new time complexity has not been rigourously verified, the difference in program run time is significant and allows for simulation lengths that were previously infeasable.
+This update primarily addresses optimization of vortex influence and wake roll-up through vectorization of nested loops, reducing time complexity from $`O(nm^2+n^2m+n^3)`$ to $`O(n)`$. Although this new time complexity has not been rigourously verified, the difference in program run time is noticably significant and allows for simulation lengths that were previously infeasable.
 
-In the process of restructuring for vectorization, sections were reformmatted to provide clarity on underlying mechanisms. Notably, the hardcoded vortex core size correction in the Wake Roll-Up section was changed to a function to allow for user-definable core sizes and Vortex Blob Regularization methods. This is accompanied by functions that model vortex spreading and dissipation respectively to simulate aspects of visocity
+In the process of restructuring for vectorization, sections were reformatted to provide clarity on underlying mechanisms. Notably, the hardcoded vortex core size correction in the Wake Roll-Up section was changed to a function to allow for user-definable core sizes and Vortex Blob Regularization methods. This is accompanied by functions that model vortex spreading and dissipation respectively to simulate aspects of visocity. Additionally, setup functions were modularized to `initialization.py` and their input parameters were concentrated to improve readability and the ease of user-input.
 
 ### Added
 
