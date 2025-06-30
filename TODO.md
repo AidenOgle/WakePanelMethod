@@ -3,11 +3,13 @@
 - [x] doublecheck and fix plot aspect ratio
   - [ ] fix padding issues, ideally dont need to call `ax.set_aspect('equal')` and can just handle it through calculation
 - [x] ~~offset of initial wakepoint for vortex blob mechanism~~ Limit vortex blobs to wake votices
-- [ ] vectorize rollup loops
-- [ ] vectorization self influence terms
+- [x] vectorize rollup loops
+- [x] vectorization self influence terms
 - [ ] vortex core merging
 - [ ] rotation and offset point for body geometry definition
+  - [ ] define quarterchord point directly, can then be used in moment coeff calculations
 - [ ] refactor code into modules
+  - [ ] body, vortexblob, plotting
 - [ ] update motion section as function and reqork how positioning is handled
 - [x] Make sure kutta condition is being enforced correctly for closed bodies
 - [ ] bluff bodies handling, moveable wake separation point, Kutta Condition toggling
