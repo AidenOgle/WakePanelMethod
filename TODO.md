@@ -9,7 +9,9 @@
 - [ ] rotation and offset point for body geometry definition
   - [ ] define quarterchord point directly, can then be used in moment coeff calculations
 - [ ] refactor code into modules
-  - [ ] body, vortexblob, plotting
+  - [x] body
+  - [x] vortexblob
+  - [ ] plotting
 - [ ] update motion section as function and reqork how positioning is handled
 - [x] Make sure kutta condition is being enforced correctly for closed bodies
 - [ ] bluff bodies handling, moveable wake separation point, Kutta Condition toggling
