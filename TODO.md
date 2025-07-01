@@ -24,3 +24,4 @@
   - [ ] (potentally) momentum viscous drag modeling
 - [ ] plots for coefficients
 - [ ] (potentially) toggles for lift models and assumptions
+- [ ] Verify if vortexdecay breaks the weak kutta condition, and if so, find a solution
