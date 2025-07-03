@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - YYYY/MM/DD
+## [0.3.2] - 2025/07/02
 
 This update primarily addresses optimization of vortex influence and wake roll-up through vectorization of nested loops, reducing time complexity from $`O(nm^2+n^2m+n^3)`$ to $`O(n)`$. Although this new time complexity has not been rigourously verified, the difference in program run time is noticably significant and allows for simulation lengths that were previously infeasable.
 
-In the process of restructuring for vectorization, sections were reformatted to provide clarity on underlying mechanisms. Notably, the hardcoded vortex core size correction in the Wake Roll-Up section was changed to a function to allow for user-definable core sizes and Vortex Blob Regularization methods. This is accompanied by functions that model vortex spreading and dissipation respectively to simulate aspects of visocity. Additionally, setup functions were modularized to `initialization.py` and their input parameters were concentrated to improve readability and the ease of user-input.
+In the process of restructuring for vectorization, sections were reformatted to provide clarity on underlying mechanisms. Notably, the hardcoded vortex core size correction in the Wake Roll-Up section was changed to a function to allow for user-definable core sizes and Vortex Blob Regularization methods. This is accompanied by functions that model vortex spreading and dissipation respectively to simulate aspects of visocity. Additionally, setup functions were modularized to `bodysetup.py` and `vortexblob.py` and their input parameters were concentrated to improve readability and the ease of user-input.
 
 ### Added
 
@@ -23,7 +23,7 @@ In the process of restructuring for vectorization, sections were reformatted to 
       
 - Added `drag` and `coeff_drag` terms as a result of decomposition the lift terms into the global reference frame. Both `lift` and `drag` calculations are experimental in this version because it is unclear if the underlying theories are being applied correctly. The calculation of forces on the body and their related coefficients needs significant work to ensure their implementation is consistent with theory and the assumptions being made
 
-- Created module `initialization.py` to contain `generateNACAfoil(...)`, `body_creation(...)`, `pitching(...)`, and `vortexblobinit(...)`. Required to be downloaded and in the same file as the main python script `PanelMethod 0.3.x.py`. In the future could add flow velocity initialization as a function with a similar structure to `pitching(...)`
+- Created modules `bodysetup.py` and `vortexblob.py` to contain `generateNACAfoil(...)`, `body_creation(...)`, `pitching(...)`, `vortexblobinit(...)`, and `vortexblobfactor(...)`. Required to be downloaded and in the same file as the main python script `PanelMethod 0.3.2.py`. In the future could add flow velocity initialization as a function with a similar structure to `pitching(...)` to `bodysetup.py`
 
 ### Changed
 
@@ -126,5 +126,6 @@ Only handles geometry, motion (displacement & pitching), and plotting animation 
   -added options to display/hide the body, vortex points, and collocation points respectively
 
 
-[0.2.0]: https://github.com/AidenOgle/2DPanelMethod/blob/01c9e7331acd49923f4bec3e91e57892a7ef2685/PanelMethod%200.2.0.py
-[0.1.0]: https://github.com/AidenOgle/2DPanelMethod/blob/c8168b5cd490e402faf819ab6691faab28032685/PanelMethod%200.1.0.py
+[0.3.2]: https://github.com/AidenOgle/WakePanelMethod/releases/tag/v0.3.2
+[0.2.0]: https://github.com/AidenOgle/WakePanelMethod/releases/tag/v0.2.0
+[0.1.0]: https://github.com/AidenOgle/WakePanelMethod/releases/tag/v0.1.0
