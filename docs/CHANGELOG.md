@@ -23,7 +23,7 @@ In the process of restructuring for vectorization, sections were reformatted to 
       
 - Added `drag` and `coeff_drag` terms as a result of decomposition the lift terms into the global reference frame. Both `lift` and `drag` calculations are experimental in this version because it is unclear if the underlying theories are being applied correctly. The calculation of forces on the body and their related coefficients needs significant work to ensure their implementation is consistent with theory and the assumptions being made
 
-- Created module `initialization.py` to contain `generateNACAfoil(...)`, `body_creation(...)`, `pitching(...)`, and `vortexblobinit(...)`. Required to be downloaded and in the same file as the main python script `PanelMethod 0.3.2.py`. In the future could add flow velocity initialization as a function with a similar structure to `pitching(...)`
+- Created modules `bodysetup.py` and `vortexblob.py` to contain `generateNACAfoil(...)`, `body_creation(...)`, `pitching(...)`, `vortexblobinit(...)`, and `vortexblobfactor(...)`. Required to be downloaded and in the same file as the main python script `PanelMethod 0.3.2.py`. In the future could add flow velocity initialization as a function with a similar structure to `pitching(...)` to `bodysetup.py`
 
 ### Changed
 
